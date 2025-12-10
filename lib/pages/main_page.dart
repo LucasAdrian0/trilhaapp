@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/dados_cadastrais.dart';
+import 'package:trilhaapp/pages/pagina1.dart';
+import 'package:trilhaapp/pages/pagina2.dart';
+import 'package:trilhaapp/pages/pagina3.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -9,6 +12,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  PageController controller = PageController(initialPage: 0);
+  int posicaoPagina = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,12 +36,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DadosCadastraisPage(
-                          texto: "Meus Dados",
-                          dados: ["Nome", "Endereço"],
-                        ),
-                      ),
-                    );
+                        builder: (context) =>  const DadosCadastraisPage()));
                   },
                 ),
                 const Divider(),
@@ -63,9 +63,35 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-        body: PageView(children: [
-          Container(color: Colors.blueGrey,)
-        ],),
+        body: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: controller,
+                onPageChanged: (value) {
+                  setState(() {
+                    posicaoPagina = value;
+                  });
+                },
+                children: const [Pagina1Page(), Pagina2Page(), Pagina3Page()],
+              ),
+            ),
+            BottomNavigationBar(
+              onTap: (value) {
+                controller.jumpToPage(value);
+              },
+              currentIndex: posicaoPagina,
+              items: [
+                BottomNavigationBarItem(label: "Page1", icon: Icon(Icons.home)),
+                BottomNavigationBarItem(label: "Page2", icon: Icon(Icons.add)),
+                BottomNavigationBarItem(
+                  label: "Page3",
+                  icon: Icon(Icons.person),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
