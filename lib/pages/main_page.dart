@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/card_page.dart';
-import 'package:trilhaapp/pages/pagina2.dart';
-import 'package:trilhaapp/pages/pagina3.dart';
+import 'package:trilhaapp/pages/image_assets.dart';
+import 'package:trilhaapp/pages/list_view_horizontal.dart';
+import 'package:trilhaapp/pages/tarefa_page.dart';
 import 'package:trilhaapp/shared/widget/coston_drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -30,10 +31,17 @@ class _MainPageState extends State<MainPage> {
                     posicaoPagina = value;
                   });
                 },
-                children: const [CardPage(), Pagina2Page(), Pagina3Page()],
+                children: [
+                  CardPage(),
+                  ImageAssetsPage(),
+                  ListView(),
+                  ListViewHorizontal(),
+                  TarefaPage(),
+                ],
               ),
             ),
             BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               onTap: (value) {
                 controller.jumpToPage(value);
               },
@@ -44,6 +52,14 @@ class _MainPageState extends State<MainPage> {
                 BottomNavigationBarItem(
                   label: "Page3",
                   icon: Icon(Icons.person),
+                ),
+                BottomNavigationBarItem(
+                  label: "Page4",
+                  icon: Icon(Icons.image),
+                ),
+                BottomNavigationBarItem(
+                  label: "Tarefas",
+                  icon: Icon(Icons.list),
                 ),
               ],
             ),

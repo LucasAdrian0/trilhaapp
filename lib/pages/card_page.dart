@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/card_detail.dart/card_detail.dart';
+import 'package:trilhaapp/model/card_detail.dart';
 import 'package:trilhaapp/pages/card_detail.dart';
 import 'package:trilhaapp/repositories/card_detail_repository.dart';
 
@@ -22,6 +22,10 @@ class _CardPageState extends State<CardPage> {
 
   void carregarDados() async {
     cardDetail = await cardDetailRepository.get();
+
+    //devido a erro adicionei isto no codigo
+    if (!mounted) return;
+
     setState(() {});
   }
 

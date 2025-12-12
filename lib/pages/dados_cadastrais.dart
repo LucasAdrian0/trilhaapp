@@ -30,6 +30,7 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
   List<DropdownMenuItem<int>> returnItens(int quantidadeMaxima) {
     var itens = <DropdownMenuItem<int>>[];
     for (var i = 0; i < quantidadeMaxima; i++) {
+      // ignore: sort_child_properties_last
       itens.add(DropdownMenuItem(child: Text(i.toString()), value: i));
     }
     return itens;
@@ -82,6 +83,7 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
                             value: nivel.toString(),
                             groupValue: nivelSelecionado,
                             onChanged: (value) {
+                              // ignore: avoid_print
                               print(value);
                               setState(() {
                                 nivelSelecionado = value.toString();
@@ -203,16 +205,16 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
                         salvando = true;
                       });
                       Future.delayed(const Duration(seconds: 3), () {
+                        // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text(
-                              "Dados salvos com sucesso",
-                            ),
+                            content: Text("Dados salvos com sucesso"),
                           ),
                         );
                         setState(() {
                           salvando = false;
                         });
+                        // ignore: use_build_context_synchronously
                         Navigator.pop(context);
                       });
                     },
